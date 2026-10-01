@@ -19,6 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   foreground, out of reach of page CSS. The shim now adopts a one-rule
   stylesheet into each root so math takes the colour of the text around it.
 
+- **A dropped PyPI request no longer breaks a WASM page.** The micropip
+  bootstrap fetches PyPI-only packages (e.g. `seaborn`) on every page load and
+  tried once: if that request failed, every cell importing the package showed
+  `ModuleNotFoundError` until the reader refreshed, and the real cause was
+  printed to a hidden cell. The install is now retried up to three times
+  (backing off 1 s, then 2 s), and a final failure goes to stderr.
+
 ## [0.1.47] — 2026-09-23
 
 ### Fixed
