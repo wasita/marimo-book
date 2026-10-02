@@ -811,3 +811,34 @@ marimo-island[data-cell-id]:first-of-type marimo-cell-output svg.animate-spin {
   pointer-events: none;
   background: var(--md-default-bg-color, transparent);
 }
+
+/* --- Personal overrides (joint-planning site only; not for upstream) ----- */
+/* Helvetica Neue everywhere, including island output: marimo reads its text
+   and heading fonts from --marimo-*-font, which inherit into shadow roots.
+   `html:root` outranks Material's inline `:root { --md-text-font }`. */
+html:root {
+  --md-text-font: "Helvetica Neue", Helvetica, Arial;
+  --marimo-text-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --marimo-heading-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Sentence-case labels at a readable size instead of tiny tracked caps
+   (sidebar sections, footer "Next"/"Previous", right-hand TOC title). */
+.md-nav--primary .md-nav__item--section > .md-nav__link,
+.md-nav--primary .md-nav__item--section > label.md-nav__link,
+.md-footer__direction,
+.md-nav--secondary .md-nav__title {
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 0.72rem;
+}
+
+/* Natural tracking on headings; the negative values read as cramped in
+   Helvetica Neue. */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-header__topic .md-ellipsis,
+.md-header__topic > .md-header__button + .md-ellipsis {
+  letter-spacing: normal;
+}
